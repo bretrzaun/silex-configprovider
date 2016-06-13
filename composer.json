@@ -1,0 +1,24 @@
+{
+    "name" : "bretrzaun/silex-configprovider",
+    "description": "Config provider for Silex projects",
+    "license": "MIT",
+    "authors" : [
+        {
+            "name" : "Bret R. Zaun",
+            "email" : "bretrzaun@hotmail.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4" : {
+            "BretRZaun\\ConfigProvider\\" : "src/"
+        }
+    },
+    "require" : {
+        "symfony/yaml" : "~2.8|~3.0"
+    },
+    "require-dev" : {
+        "php" : ">5.6",    
+        "phpunit/phpunit" : "~5.0",
+        "silex/silex": "~1.3"
+    }
+}

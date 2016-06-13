@@ -1,0 +1,10 @@
+debug: true
+maintenance: false
+redirects:
+    /impressum: /content/item/123
+    /bar: /foo
+path: %application_path%/test/
+options:
+    url:
+    site_id: 1
+    enabled: false
