@@ -2,7 +2,8 @@
 namespace BretRZaun\ConfigProvider;
 
 use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -42,7 +43,7 @@ class ConfigServiceProvider implements ServiceProviderInterface
     /**
      * @inheritdoc
      */
-    public function register(Application $app)
+    public function register(Container $app)
     {
         if (!file_exists($this->configfile)) {
             throw new \RuntimeException("Config file {$this->configfile} not found.");
@@ -55,7 +56,13 @@ class ConfigServiceProvider implements ServiceProviderInterface
         $this->merge($app, $config);
     }
 
-    private function merge(Application $app, array $config)
+    /**
+     * @param Container $app
+     * @param array     $config
+     *
+     * @return void
+     */
+    private function merge(Container $app, array $config)
     {
         foreach ($config as $key => $value) {
             if (isset($app[$key]) && is_array($value)) {
@@ -66,6 +73,12 @@ class ConfigServiceProvider implements ServiceProviderInterface
         }
     }
 
+    /**
+     * @param array $currentValue
+     * @param array $newValue
+     *
+     * @return array
+     */
     private function mergeRecursively(array $currentValue, array $newValue)
     {
         foreach ($newValue as $name => $value) {
@@ -78,6 +91,11 @@ class ConfigServiceProvider implements ServiceProviderInterface
         return $currentValue;
     }
 
+    /**
+     * @param $value
+     *
+     * @return array|string
+     */
     private function doReplacements($value)
     {
         if (!$this->replacements) {
@@ -93,12 +111,5 @@ class ConfigServiceProvider implements ServiceProviderInterface
             return strtr($value, $this->replacements);
         }
         return $value;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function boot(Application $app)
-    {
     }
 }
