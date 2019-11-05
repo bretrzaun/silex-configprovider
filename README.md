@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # Silex Config Service Provider
 
 [![Build Status](https://travis-ci.org/bretrzaun/silex-configprovider.svg?branch=master)](https://travis-ci.org/bretrzaun/silex-configprovider)
